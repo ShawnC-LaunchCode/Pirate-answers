@@ -3,40 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pirates Photo Gallery</title>
+    <title>The Pirate Crew Gallery</title>
     <style>
-        /* Basic styling for the gallery */
+        /* --- General Styling --- */
         body {
-            font-family: sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* Darker background */
+            color: #f0f0f0;
             text-align: center;
-            padding: 20px;
-            background-color: #f4f4f4;
         }
         h1 {
-            color: #333;
-            margin-bottom: 40px;
+            color: #FFC300; /* Pirate-themed accent color */
+            padding: 40px 20px 20px;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px #333;
         }
+
+        /* --- Grid Layout for Gallery --- */
         .gallery-container {
-            display: flex;
-            flex-wrap: wrap;
+            width: 90%;
+            max-width: 1200px; /* Max width for large screens */
+            margin: 0 auto;
+            padding-bottom: 50px;
+            
+            /* CSS Grid Magic! */
+            display: grid;
+            /* Creates columns that fit as many 300px items as possible */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px; /* Space between the grid items */
             justify-content: center;
-            gap: 20px; /* Space between images */
         }
+
+        /* --- Individual Image Card Styling --- */
         .gallery-item {
-            background-color: white;
-            border: 1px solid #ddd;
-            padding: 10px;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            background-color: #1e1e1e; /* Slightly lighter dark card background */
+            border-radius: 10px;
+            overflow: hidden; /* Ensures image corners match the card */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); /* Deeper shadow */
+            transition: transform 0.3s ease; /* Smooth hover effect */
         }
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.02); /* Slight lift on hover */
+        }
+        
         .gallery-item img {
-            max-width: 300px; /* Set a standard size for display */
+            width: 100%; /* Image fills the container */
             height: auto;
             display: block;
+            object-fit: cover;
+            aspect-ratio: 1 / 1; /* Makes all images square, useful for a uniform gallery */
         }
+        
         .image-caption {
-            margin-top: 10px;
-            font-size: 0.9em;
-            color: #555;
+            padding: 15px 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #FFD700; /* Gold color for names */
+            text-transform: capitalize; /* Ensures names look consistent */
         }
     </style>
 </head>

@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Pirate Crew Gallery</title>
     <style>
-        /* --- General Styling --- */
+        /* --- General Styling (Mostly unchanged) --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #121212; /* Darker background */
+            background-color: #121212;
             color: #f0f0f0;
             text-align: center;
         }
         h1 {
-            color: #FFC300; /* Pirate-themed accent color */
+            color: #FFC300;
             padding: 40px 20px 20px;
             font-size: 2.5em;
             letter-spacing: 2px;
@@ -25,44 +25,111 @@
         /* --- Grid Layout for Gallery --- */
         .gallery-container {
             width: 90%;
-            max-width: 1200px; /* Max width for large screens */
+            max-width: 1200px;
             margin: 0 auto;
             padding-bottom: 50px;
-            
-            /* CSS Grid Magic! */
             display: grid;
-            /* Creates columns that fit as many 300px items as possible */
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px; /* Space between the grid items */
+            gap: 25px;
             justify-content: center;
         }
 
         /* --- Individual Image Card Styling --- */
         .gallery-item {
-            background-color: #1e1e1e; /* Slightly lighter dark card background */
+            background-color: #1e1e1e;
             border-radius: 10px;
-            overflow: hidden; /* Ensures image corners match the card */
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); /* Deeper shadow */
-            transition: transform 0.3s ease; /* Smooth hover effect */
+            overflow: hidden;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+            cursor: pointer; /* Indicate it's clickable */
         }
         .gallery-item:hover {
-            transform: translateY(-5px) scale(1.02); /* Slight lift on hover */
+            transform: translateY(-5px) scale(1.02);
         }
         
         .gallery-item img {
-            width: 100%; /* Image fills the container */
+            width: 100%;
             height: auto;
             display: block;
             object-fit: cover;
-            aspect-ratio: 1 / 1; /* Makes all images square, useful for a uniform gallery */
+            aspect-ratio: 1 / 1;
         }
         
         .image-caption {
             padding: 15px 10px;
             font-size: 1.1em;
             font-weight: bold;
-            color: #FFD700; /* Gold color for names */
-            text-transform: capitalize; /* Ensures names look consistent */
+            color: #FFD700;
+            text-transform: capitalize;
+        }
+
+        /* --- New Modal/Lightbox Styling --- */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 100; /* High z-index to cover everything */
+            padding-top: 50px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.95); /* Semi-transparent black background */
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh; /* Prevent it from being taller than the viewport */
+            object-fit: contain; /* Ensures the whole image is visible */
+        }
+
+        /* The Close Button */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+
+        /* Next/Prev controls */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 101;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
         }
     </style>
 </head>
@@ -70,39 +137,113 @@
 
     <h1>The Pirate Crew Photos</h1>
 
-    <div class="gallery-container">
+    <div class="gallery-container" id="galleryContainer">
         
-        <div class="gallery-item">
+        <div class="gallery-item" data-src="pirates/Amina.png" data-alt="Amina">
             <img src="pirates/Amina.png" alt="Photo of Amina">
             <p class="image-caption">Amina</p>
         </div>
 
-        <div class="gallery-item">
+        <div class="gallery-item" data-src="pirates/Audrey.jpeg" data-alt="Audrey">
             <img src="pirates/Audrey.jpeg" alt="Photo of Audrey">
             <p class="image-caption">Audrey</p>
         </div>
 
-        <div class="gallery-item">
+        <div class="gallery-item" data-src="pirates/Bella.jpeg" data-alt="Bella">
             <img src="pirates/Bella.jpeg" alt="Photo of Bella">
             <p class="image-caption">Bella</p>
         </div>
         
-        <div class="gallery-item">
+        <div class="gallery-item" data-src="pirates/Grace.jpeg" data-alt="Grace">
             <img src="pirates/Grace.jpeg" alt="Photo of Grace">
             <p class="image-caption">Grace</p>
         </div>
 
-        <div class="gallery-item">
+        <div class="gallery-item" data-src="pirates/Harper.jpeg" data-alt="Harper">
             <img src="pirates/Harper.jpeg" alt="Photo of Harper">
             <p class="image-caption">Harper</p>
         </div>
 
-        <div class="gallery-item">
+        <div class="gallery-item" data-src="pirates/Heather.jpeg" data-alt="Heather">
             <img src="pirates/Heather.jpeg" alt="Photo of Heather">
             <p class="image-caption">Heather</p>
         </div>
 
     </div>
 
+    <div id="imageModal" class="modal">
+        <span class="close-btn">&times;</span>
+        
+        <img class="modal-content" id="modalImage">
+
+        <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+        <a class="next" onclick="changeImage(1)">&#10095;</a>
+    </div>
+
+    <script>
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+        let currentImageIndex = 0;
+
+        // 1. Setup Click Handlers
+        galleryItems.forEach((item, index) => {
+            item.onclick = function() {
+                // Set the current index to the clicked photo
+                currentImageIndex = index;
+                
+                // Show the modal
+                modal.style.display = "block";
+                
+                // Load the image into the modal
+                updateModalImage();
+            }
+        });
+
+        // 2. Function to update the image source and alt text
+        function updateModalImage() {
+            const item = galleryItems[currentImageIndex];
+            modalImg.src = item.getAttribute('data-src');
+            modalImg.alt = item.getAttribute('data-alt');
+        }
+
+        // 3. Function to handle next/previous navigation
+        function changeImage(step) {
+            // Calculate the new index
+            currentImageIndex += step;
+
+            // Handle wrapping (looping around the array)
+            if (currentImageIndex < 0) {
+                currentImageIndex = galleryItems.length - 1; // Go to the last image
+            } else if (currentImageIndex >= galleryItems.length) {
+                currentImageIndex = 0; // Go back to the first image
+            }
+
+            updateModalImage();
+        }
+
+        // 4. Get the <span> element that closes the modal
+        const span = document.getElementsByClassName("close-btn")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the image, close the modal
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+        
+        // Bonus: Close modal with the ESC key
+        document.onkeydown = function(e) {
+            e = e || window.event;
+            if (e.key === "Escape" || e.key === "Esc") {
+                modal.style.display = "none";
+            }
+        };
+    </script>
 </body>
 </html>

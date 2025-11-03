@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pirates Photo Gallery</title>
+    <style>
+        /* Basic styling for the gallery */
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px; /* Space between images */
+        }
+        .gallery-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+        .gallery-item img {
+            max-width: 300px; /* Set a standard size for display */
+            height: auto;
+            display: block;
+        }
+        .image-caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>The Pirate Crew Photos</h1>
+
+    <div class="gallery-container">
+        
+        <div class="gallery-item">
+            <img src="pirates/Amina.png" alt="Photo of Amina">
+            <p class="image-caption">Amina</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="pirates/Audrey.jpeg" alt="Photo of Audrey">
+            <p class="image-caption">Audrey</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="pirates/Bella.jpeg" alt="Photo of Bella">
+            <p class="image-caption">Bella</p>
+        </div>
+        
+        <div class="gallery-item">
+            <img src="pirates/Grace.jpeg" alt="Photo of Grace">
+            <p class="image-caption">Grace</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="pirates/Harper.jpeg" alt="Photo of Harper">
+            <p class="image-caption">Harper</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="pirates/Heather.jpeg" alt="Photo of Heather">
+            <p class="image-caption">Heather</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
